@@ -1,0 +1,3 @@
+﻿  main.cpp
+h:\youtube projects\c++ console state rpg\c++ console state rpg\main.cpp(14): warning C4305: 'initializing': truncation from 'double' to 'float'
+  C++ Console State RPG.vcxproj -> H:\YOUTUBE PROJECTS\C++ Console State RPG\Debug\C++ Console State RPG.exe
