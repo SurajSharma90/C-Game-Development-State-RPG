@@ -1,3 +1,6 @@
-﻿  main.cpp
-h:\youtube projects\c---state-rpg\c++ console state rpg\main.cpp(14): warning C4305: 'initializing': truncation from 'double' to 'float'
+﻿  Character.cpp
+h:\youtube projects\c---state-rpg\c++ console state rpg\character.cpp(15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Game.cpp
+  main.cpp
+  Generating Code...
   C++ Console State RPG.vcxproj -> H:\YOUTUBE PROJECTS\C---State-RPG\x64\Debug\C++ Console State RPG.exe
