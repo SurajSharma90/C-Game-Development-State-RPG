@@ -4,12 +4,16 @@
 #include<iostream>
 #include<vector>
 #include<sstream>
+#include<cmath>
+
+//(50/3) * (pow(x, 3) - 6*pow(x, 2) + (x * 17) - 12);
 
 class Character
 {
 private:
 	//core
 	std::string name;
+	std::string bio;
 	int level;
 	int exp;
 	int expNext;
@@ -48,9 +52,11 @@ private:
 	void updateStats();
 
 public:
-	Character(std::string name);
+	Character(std::string name, std::string bio);
 	virtual ~Character();
 
+	//Functions
+	bool canLevelUp();
 	const std::string getMenuBar();
 	const std::string toString();
 };

@@ -18,6 +18,7 @@ public:
 	const bool& getQuit() const;
 
 	//Modifiers
+	void setQuit(const bool quit);
 
 	//Functions
 	virtual void update() = 0; //Pure virtual function

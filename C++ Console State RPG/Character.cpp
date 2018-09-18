@@ -18,12 +18,13 @@ void Character::updateStats()
 }
 
 //Constructors and Destructors
-Character::Character(std::string name)
+Character::Character(std::string name, std::string bio)
 {
 	this->name = name;
+	this->bio = bio;
 	this->level = 1;
-	this->exp = 0;
-	this->expNext = 100;
+	this->exp = 1000;
+	this->expNext = 46;
 	this->statpoints = 0;
 
 	this->strenght = 1;
@@ -45,15 +46,31 @@ Character::~Character()
 }
 
 //Functions
+bool Character::canLevelUp()
+{
+	if (this->exp >= this->expNext)
+	{
+		this->level++;
+		this->exp -= this->expNext;
+		this->expNext = (50 / 3) * (pow(this->level, 3) - 6 * pow(this->level, 2) + (this->level * 17) - 12);
+		this->statpoints++;
+
+		return true;
+	}
+
+	return false;
+}
+
 const std::string Character::getMenuBar()
 {
 	std::stringstream ss;
 
-	ss << "Name: " << this->name << " | "
+	ss << " Name: " << this->name << " | "
 		<< "Level: " << this->level << " | "
 		<< "Exp: " << this->exp << " / " << this->expNext << " | "
 		<< "HP: " << this->hp << " / " << this->hpMax << " | "
-		<< "Stamina: " << this->stamina << " / " << this->staminaMax;
+		<< "Stamina: " << this->stamina << " / " << this->staminaMax << "\n"
+		<< " Stat points available: " << this->statpoints;
 
 	return ss.str();
 }
@@ -66,31 +83,32 @@ const std::string Character::toString()
 
 	std::stringstream ss;
 
-	ss << "Name: " << this->name << "\n"
-		<< "Level: " << this->level << "\n"
-		<< "Exp: " << this->exp << " / " << this->expNext << "\n"
+	ss << " Name: " << this->name << "\n" << "\n"
+		<< " Bio: " << this->bio << "\n" << "\n"
+		<< " Level: " << this->level << "\n"
+		<< " Exp: " << this->exp << " / " << this->expNext << "\n"
 		<< "\n"
 
-		<< "Strenght: " << this->strenght << "\n"
-		<< "Vitality: " << this->vitality << "\n"
-		<< "Agility: " << this->agility << "\n"
-		<< "Dexterity: " << this->dexterity << "\n"
-		<< "Intelligence: " << this->intelligence << "\n"
+		<< " Strenght: " << this->strenght << "\n"
+		<< " Vitality: " << this->vitality << "\n"
+		<< " Agility: " << this->agility << "\n"
+		<< " Dexterity: " << this->dexterity << "\n"
+		<< " Intelligence: " << this->intelligence << "\n"
 		<< "\n"
 
-		<< "HP: " << this->hp << " / " << this->hpMax << "\n"
-		<< "Stamina: " << this->stamina << " / " << this->staminaMax << "\n"
-		<< "Mana: " << this->mana << " / " << this->manaMax << "\n"
+		<< " HP: " << this->hp << " / " << this->hpMax << "\n"
+		<< " Stamina: " << this->stamina << " / " << this->staminaMax << "\n"
+		<< " Mana: " << this->mana << " / " << this->manaMax << "\n"
 		<< "\n"
 
-		<< "Defence: " << this->defence << "\n"
-		<< "Dodge chance: " << this->dodgeChance << "\n"
-		<< "Hit rating: " << this->hitRating << "\n"
-		<< "Crit chance: " << this->critChance << "\n"
-		<< "Magic find: " << this->magicFind << "\n"
+		<< " Defence: " << this->defence << "\n"
+		<< " Dodge chance: " << this->dodgeChance << "\n"
+		<< " Hit rating: " << this->hitRating << "\n"
+		<< " Crit chance: " << this->critChance << "\n"
+		<< " Magic find: " << this->magicFind << "\n"
 		<< "\n"
 
-		<< "Gold: " << this->gold << "\n"
+		<< " Gold: " << this->gold << "\n"
 		<< "\n";
 
 	return ss.str();

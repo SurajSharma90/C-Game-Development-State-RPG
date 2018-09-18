@@ -1,9 +1,5 @@
 #pragma once
-#include<vector>
-#include<iostream>
-#include<fstream>
-#include"State.h"
-#include"Character.h"
+#include"MainMenuState.h"
 
 using namespace std;
 
@@ -12,10 +8,9 @@ class Game
 private:
 	//Variables
 	bool quit;
-	vector<State> states;
-	State* currentState;
-
+	
 	Character* character;
+	stack<State*> states;
 
 public:
 	//Constructors and Destructors
@@ -28,8 +23,5 @@ public:
 	//Modifiers
 
 	//Functions
-	void printMenu() const;
-	const int getChoice() const;
-	void updateMenu();
 	void update();
 };
