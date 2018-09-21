@@ -1,4 +1,8 @@
 #pragma once
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
 
 /*
 Abstract class
@@ -21,6 +25,7 @@ public:
 	void setQuit(const bool quit);
 
 	//Functions
+	virtual int getChoice() const;
 	virtual void update() = 0; //Pure virtual function
 
 };

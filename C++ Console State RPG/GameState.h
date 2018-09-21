@@ -6,6 +6,7 @@
 #include<stack>
 #include "State.h"
 #include "Character.h"
+#include "CharacterMenuState.h"
 
 using namespace std;
 
@@ -22,7 +23,6 @@ public:
 
 	//Functions
 	void printMenu() const;
-	const int getChoice() const;
 	void updateMenu();
 	void update();
 };

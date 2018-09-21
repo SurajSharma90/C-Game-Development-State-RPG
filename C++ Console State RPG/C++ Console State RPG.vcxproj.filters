@@ -37,7 +37,10 @@
       <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="CharacterCreatorState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterMenuState.cpp">
+      <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -57,7 +60,10 @@
       <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="CharacterCreatorState.h">
-      <Filter>Header Files</Filter>
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterMenuState.h">
+      <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

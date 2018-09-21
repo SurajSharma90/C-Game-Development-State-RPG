@@ -59,5 +59,7 @@ public:
 	bool canLevelUp();
 	const std::string getMenuBar();
 	const std::string toString();
+	const std::string toStringNameBio();
+	const std::string toStringStats();
 };
 

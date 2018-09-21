@@ -1,19 +1,27 @@
 #pragma once
-#include"State.h"
-#include<iostream>
 
-class CharacterMenuState : public State
+#include<iostream>
+#include<iomanip>
+#include<stack>
+#include "Character.h"
+#include "State.h"
+
+using namespace std;
+
+class CharacterMenuState :
+	public State
 {
 private:
+	Character *& character;
+	stack<State*>*states;
+
 public:
-	CharacterMenuState()
-		: State()
-	{
+	CharacterMenuState(Character*& character,
+		stack<State*>* states);
+	virtual ~CharacterMenuState();
 
-	}
-
-	void update()
-	{
-		std::cout << "From CHARACTER MENU!";
-	}
+	//Functions
+	void printMenu();
+	void updateMenu();
+	void update();
 };

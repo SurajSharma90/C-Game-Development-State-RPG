@@ -1,9 +1,12 @@
 #include "MainMenuState.h"
 
-MainMenuState::MainMenuState(Character*& character,
+MainMenuState::MainMenuState(
+	vector<Character*>* characterList,
+	unsigned& activeCharacter,
 	stack<State*>* states)
-	: character(character)
+	: State(), activeCharacter(activeCharacter)
 {
+	this->characterList = characterList;
 	this->states = states;
 }
 
@@ -14,45 +17,43 @@ MainMenuState::~MainMenuState()
 
 void MainMenuState::printMenu()
 {
-	system("PAUSE");
 	system("CLS");
-	cout << " --- Main Menu ---" << "\n" << "\n"
-		<< " (0) Quit to desktop" << "\n"
+	cout << " --- Main Menu ---" << "\n" << "\n";
+
+	if (!this->characterList->empty())
+		cout << this->characterList->at(this->activeCharacter)->getMenuBar() << "\n" << "\n";
+	else
+		cout << " No character selected!" << "\n" << "\n";
+
+	cout << " (0) Quit to desktop" << "\n"
 		<< " (1) Start Game" << "\n"
 		<< " (2) Create Character" << "\n" << "\n";
 }
 
-const int MainMenuState::getChoice() const
-{
-	int choice = 0;
-
-	cout << "Enter choice: ";
-	cin >> choice;
-
-	cin.ignore();
-	cin.clear();
-
-	return choice;
-}
-
 void MainMenuState::updateMenu()
 {
-	switch (this->getChoice() | system("CLS"))
+	switch (this->getChoice())
 	{
 	case 0:
 		this->setQuit(true);
 		break;
 	case 1:
-		if (this->character != nullptr)
-			this->states->push(new GameState(this->character, this->states));
+		if (!this->characterList->empty())
+			this->states->push(new GameState(this->characterList->at(this->activeCharacter), this->states));
 		else
+		{
+			system("CLS");
 			cout << "Error! Create a character first!" << "\n";
+			system("PAUSE");
+		}
 		break;
 	case 2:
-		this->states->push(new CharacterCreatorState(this->character, this->states));
+		this->states->push(new CharacterCreatorState(this->characterList, this->activeCharacter, this->states));
 		break;
 	default:
+		system("CLS");
 		cout << "Not a valid option! " << "\n";
+		system("PAUSE");
 		break;
 	}
 }

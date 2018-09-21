@@ -113,3 +113,46 @@ const std::string Character::toString()
 
 	return ss.str();
 }
+
+const std::string Character::toStringNameBio()
+{
+	std::stringstream ss;
+
+	ss << " Name: " << this->name << "\n" << "\n"
+		<< " Bio: " << this->bio << "\n" << "\n";
+
+	return ss.str();
+}
+
+const std::string Character::toStringStats()
+{
+	std::stringstream ss;
+
+	ss << " Level: " << this->level << "\n"
+		<< " Exp: " << this->exp << " / " << this->expNext << "\n" 
+		<< "\n"
+
+		<< " Strenght: " << this->strenght << "\n"
+		<< " Vitality: " << this->vitality << "\n"
+		<< " Agility: " << this->agility << "\n"
+		<< " Dexterity: " << this->dexterity << "\n"
+		<< " Intelligence: " << this->intelligence << "\n"
+		<< "\n"
+
+		<< " HP: " << this->hp << " / " << this->hpMax << "\n"
+		<< " Stamina: " << this->stamina << " / " << this->staminaMax << "\n"
+		<< " Mana: " << this->mana << " / " << this->manaMax << "\n"
+		<< "\n"
+
+		<< " Defence: " << this->defence << "\n"
+		<< " Dodge chance: " << this->dodgeChance << "\n"
+		<< " Hit rating: " << this->hitRating << "\n"
+		<< " Crit chance: " << this->critChance << "\n"
+		<< " Magic find: " << this->magicFind << "\n"
+		<< "\n"
+
+		<< " Gold: " << this->gold << "\n"
+		<< "\n";
+
+	return ss.str();
+}

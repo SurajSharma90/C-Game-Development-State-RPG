@@ -12,18 +12,21 @@ class CharacterCreatorState :
 	public State
 {
 private:
-	Character *& character;
+	const unsigned maxCharacters;
+	vector<Character*>* characterList;
+	unsigned& activeCharacter;
 	stack<State*>*states;
 
 public:
-	CharacterCreatorState(Character*& character,
+	CharacterCreatorState(
+		vector<Character*>* characterList,
+		unsigned& activeCharacter,
 		stack<State*>* states);
 	virtual ~CharacterCreatorState();
 
 	//Functions
 	void createCharacter();
 	void printMenu();
-	const int getChoice() const;
 	void updateMenu();
 	void update();
 };

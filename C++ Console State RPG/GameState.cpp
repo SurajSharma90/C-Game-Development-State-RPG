@@ -1,8 +1,9 @@
 #include "GameState.h"
 
-GameState::GameState(Character*& character, 
+GameState::GameState(
+	Character*& character, 
 	stack<State*>*states)
-	: character(character)
+	: State(), character(character)
 {
 	this->states = states;
 }
@@ -14,56 +15,36 @@ GameState::~GameState()
 //Functions
 void GameState::printMenu() const
 {
-	system("PAUSE");
 	system("CLS");
 	cout << " --- GAME MENU ---" << "\n" << "\n"
 		<< this->character->getMenuBar() << "\n" << "\n"
-		<< " (0) Quit to main menu" << "\n"
-		<< " (1) Character Stats" << "\n"
-		<< " (2) Inventory" << "\n"
-		<< " (3) Shop" << "\n"
-		<< " (4) Travel" << "\n"
-		<< " (5) Rest" << "\n" << "\n";
-}
-
-const int GameState::getChoice() const
-{
-	int choice = 0;
-
-	cout << "Enter choice: ";
-	cin >> choice;
-	
-	cin.ignore();
-	cin.clear();
-
-	return choice;
+		<< " (0) Quit to Main Menu" << "\n"
+		<< " (1) Character Menu" << "\n"
+		<< " (2) Shop Menu" << "\n"
+		<< " (3) Travel Menu" << "\n"
+		<< " (4) Rest Menu" << "\n" << "\n";
 }
 
 void GameState::updateMenu()
 {
-	switch (this->getChoice() | system("CLS"))
+	switch (this->getChoice())
 	{
 	case 0:
-		cout << setw(7) << " --- QUITTING GAME ---" << "\n";
 		this->setQuit(true);
 		break;
 
 	case 1:
-		cout << setw(7) << " --- Character Stats ---" << "\n" << "\n";
-		std::cout << this->character->toString() << "\n";
+		this->states->push(new CharacterMenuState(this->character, this->states));
 		break;
 
 	case 2:
-		cout << setw(7) << " --- Inventory ---" << "\n";
-
-		if (this->character->canLevelUp())
-		{
-			std::cout << "LEVEL UP!" << "\n";
-		}
+		
 		break;
 
 	default:
-		cout << setw(7) << " --- No such option in menu! ---" << "\n";
+		system("CLS");
+		cout << "Not a valid option!" << "\n";
+		system("PAUSE");
 		break;
 	}
 }

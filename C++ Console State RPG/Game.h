@@ -9,7 +9,8 @@ private:
 	//Variables
 	bool quit;
 	
-	Character* character;
+	unsigned activeCharacter;
+	vector<Character*> characterList;
 	stack<State*> states;
 
 public:
