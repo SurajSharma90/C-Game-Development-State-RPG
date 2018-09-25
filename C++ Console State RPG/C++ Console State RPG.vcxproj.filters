@@ -42,6 +42,12 @@
     <ClCompile Include="CharacterMenuState.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="CharacterSelectorState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="TravelMenuState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -64,6 +70,12 @@
     </ClInclude>
     <ClInclude Include="CharacterMenuState.h">
       <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterSelectorState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="TravelMenuState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

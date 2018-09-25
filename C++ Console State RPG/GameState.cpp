@@ -18,7 +18,7 @@ void GameState::printMenu() const
 	system("CLS");
 	cout << " --- GAME MENU ---" << "\n" << "\n"
 		<< this->character->getMenuBar() << "\n" << "\n"
-		<< " (0) Quit to Main Menu" << "\n"
+		<< " (-1) Quit to Main Menu" << "\n"
 		<< " (1) Character Menu" << "\n"
 		<< " (2) Shop Menu" << "\n"
 		<< " (3) Travel Menu" << "\n"
@@ -29,7 +29,7 @@ void GameState::updateMenu()
 {
 	switch (this->getChoice())
 	{
-	case 0:
+	case -1:
 		this->setQuit(true);
 		break;
 
@@ -39,6 +39,10 @@ void GameState::updateMenu()
 
 	case 2:
 		
+		break;
+
+	case 3:
+		this->states->push(new TravelMenuState(this->character, this->states));
 		break;
 
 	default:

@@ -25,16 +25,17 @@ void MainMenuState::printMenu()
 	else
 		cout << " No character selected!" << "\n" << "\n";
 
-	cout << " (0) Quit to desktop" << "\n"
+	cout << " (-1) Quit to desktop" << "\n"
 		<< " (1) Start Game" << "\n"
-		<< " (2) Create Character" << "\n" << "\n";
+		<< " (2) Create Character" << "\n"
+		<< " (3) Select Character" << "\n" << "\n";
 }
 
 void MainMenuState::updateMenu()
 {
 	switch (this->getChoice())
 	{
-	case 0:
+	case -1:
 		this->setQuit(true);
 		break;
 	case 1:
@@ -49,6 +50,9 @@ void MainMenuState::updateMenu()
 		break;
 	case 2:
 		this->states->push(new CharacterCreatorState(this->characterList, this->activeCharacter, this->states));
+		break;
+	case 3:
+		this->states->push(new CharacterSelectorState(this->characterList, this->activeCharacter, this->states));
 		break;
 	default:
 		system("CLS");

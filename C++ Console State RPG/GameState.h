@@ -7,6 +7,7 @@
 #include "State.h"
 #include "Character.h"
 #include "CharacterMenuState.h"
+#include "TravelMenuState.h"
 
 using namespace std;
 

@@ -3,6 +3,7 @@
 #include<iomanip>
 #include<stack>
 #include"CharacterCreatorState.h"
+#include"CharacterSelectorState.h"
 #include"GameState.h"
 
 using namespace std;

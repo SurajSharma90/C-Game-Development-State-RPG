@@ -1,4 +1,8 @@
-﻿  CharacterCreatorState.cpp
+﻿  CharacterMenuState.cpp
+  Game.cpp
+  GameState.cpp
+  main.cpp
   MainMenuState.cpp
+  TravelMenuState.cpp
   Generating Code...
   C++ Console State RPG.vcxproj -> H:\YOUTUBE PROJECTS\C---State-RPG\x64\Debug\C++ Console State RPG.exe

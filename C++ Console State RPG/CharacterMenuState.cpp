@@ -18,7 +18,7 @@ void CharacterMenuState::printMenu()
 	system("CLS");
 	cout << " --- Character Menu ---" << "\n" << "\n"
 		<< this->character->getMenuBar() << "\n" << "\n"
-		<< " (0) Back to menu" << "\n"
+		<< " (-1) Back to menu" << "\n"
 		<< " (1) Name & Bio" << "\n"
 		<< " (2) Stats" << "\n"
 		<< " (3) Assign statpoints" << "\n"
@@ -29,7 +29,7 @@ void CharacterMenuState::updateMenu()
 {
 	switch (this->getChoice())
 	{
-	case 0:
+	case -1:
 		this->setQuit(true);
 		break;
 	case 1:

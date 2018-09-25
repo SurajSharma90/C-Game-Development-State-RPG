@@ -20,6 +20,9 @@ void Character::updateStats()
 //Constructors and Destructors
 Character::Character(std::string name, std::string bio)
 {
+	this->x = 0;
+	this->y = 0;
+
 	this->name = name;
 	this->bio = bio;
 	this->level = 1;
@@ -45,7 +48,18 @@ Character::~Character()
 
 }
 
+void Character::setPosition(const unsigned x, const unsigned y)
+{
+	this->x = x;
+	this->y = y;
+}
+
 //Functions
+void Character::addExp(const unsigned exp)
+{
+	this->exp += exp;
+}
+
 bool Character::canLevelUp()
 {
 	if (this->exp >= this->expNext)
@@ -110,6 +124,15 @@ const std::string Character::toString()
 
 		<< " Gold: " << this->gold << "\n"
 		<< "\n";
+
+	return ss.str();
+}
+
+const std::string Character::toStringPosition()
+{
+	std::stringstream ss;
+
+	ss << " x: " << this->x << " y: " << this->y << "\n";
 
 	return ss.str();
 }

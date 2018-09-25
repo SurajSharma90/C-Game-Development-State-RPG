@@ -11,6 +11,10 @@
 class Character
 {
 private:
+	//location
+	unsigned x;
+	unsigned y;
+
 	//core
 	std::string name;
 	std::string bio;
@@ -55,10 +59,17 @@ public:
 	Character(std::string name, std::string bio);
 	virtual ~Character();
 
+	//Accessors
+
+	//Modifiers
+	void setPosition(const unsigned x, const unsigned y);
+
 	//Functions
+	void addExp(const unsigned exp);
 	bool canLevelUp();
 	const std::string getMenuBar();
 	const std::string toString();
+	const std::string toStringPosition();
 	const std::string toStringNameBio();
 	const std::string toStringStats();
 };
