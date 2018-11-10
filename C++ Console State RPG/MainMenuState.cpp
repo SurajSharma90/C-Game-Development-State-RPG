@@ -8,6 +8,9 @@ MainMenuState::MainMenuState(
 {
 	this->characterList = characterList;
 	this->states = states;
+
+	//FOR DEVELOPMENT PURPOUSES
+	this->characterList->push_back(new Character("TEST", "DEBUGGING CHARACTER"));
 }
 
 MainMenuState::~MainMenuState()

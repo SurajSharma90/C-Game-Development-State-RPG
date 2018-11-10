@@ -10,8 +10,9 @@ void Character::updateStats()
 	this->manaMax = this->vitality * 10 + this->vitality;
 	this->mana = this->manaMax;
 
-	this->defence = this->agility;
-	this->dodgeChance = static_cast<float>(this->agility)/60;
+	this->damageMin = this->strenght * 2;
+	this->damageMax = this->strenght + this->strenght * 2;
+	this->defence = this->agility * 2;
 	this->hitRating = this->dexterity * 2 + this->dexterity;
 	this->critChance = static_cast<float>(this->dexterity) / 60;
 	this->magicFind = static_cast<float>(this->intelligence) / 70;
@@ -40,6 +41,8 @@ Character::Character(std::string name, std::string bio)
 
 	this->updateStats();
 
+	this->inventory.add(Item("test", 0, 1, 200));
+
 	//Initialize attributes and core stats
 }
 
@@ -54,7 +57,71 @@ void Character::setPosition(const unsigned x, const unsigned y)
 	this->y = y;
 }
 
+void Character::move(const int x, const int y)
+{
+	if (static_cast<int>(this->x) + x < 0)
+		this->x = 0;
+	else
+		this->x += x;
+
+	if (static_cast<int>(this->y) + y < 0)
+		this->y = 0;
+	else
+		this->y += y;
+}
+
 //Functions
+const std::string Character::flee()
+{
+	std::stringstream ss;
+	int lostExp = rand() % (this->level * 5) + 1;
+	int lostGold = rand() % (this->level * 5) + 1;
+	ss << " Exp lost: " << lostExp << " | " << " Gold lost: " << lostGold;
+
+	this->exp -= lostExp;;
+
+	if (this->exp < 0)
+		this->exp = 0;
+
+	this->gold -= lostGold;
+
+	if (this->gold < 0)
+		this->gold = 0;
+
+	return ss.str();
+}
+
+void Character::reset()
+{
+	this->hp = this->hpMax;
+	this->stamina = this->staminaMax;
+	this->mana = this->manaMax;
+}
+
+void Character::takeDamage(const int damage)
+{
+	this->hp -= damage;
+
+	if (this->hp <= 0)
+		this->setDead();
+}
+
+void Character::setDead()
+{
+	this->hp = 0;
+
+	//Do some other stuff
+	this->exp -= rand()% (this->level * 10) + 1;
+
+	if (this->exp < 0)
+		this->exp = 0;
+
+	this->gold -= rand() % (this->level * 10) + 1;
+
+	if (this->gold < 0)
+		this->gold = 0;
+}
+
 void Character::addExp(const unsigned exp)
 {
 	this->exp += exp;
@@ -115,8 +182,8 @@ const std::string Character::toString()
 		<< " Mana: " << this->mana << " / " << this->manaMax << "\n"
 		<< "\n"
 
+		<< " Damage: " << this->damageMin << " - " << this->damageMax << "\n"
 		<< " Defence: " << this->defence << "\n"
-		<< " Dodge chance: " << this->dodgeChance << "\n"
 		<< " Hit rating: " << this->hitRating << "\n"
 		<< " Crit chance: " << this->critChance << "\n"
 		<< " Magic find: " << this->magicFind << "\n"
@@ -167,8 +234,8 @@ const std::string Character::toStringStats()
 		<< " Mana: " << this->mana << " / " << this->manaMax << "\n"
 		<< "\n"
 
+		<< " Damage: " << this->damageMin << " - " << this->damageMax << "\n"
 		<< " Defence: " << this->defence << "\n"
-		<< " Dodge chance: " << this->dodgeChance << "\n"
 		<< " Hit rating: " << this->hitRating << "\n"
 		<< " Crit chance: " << this->critChance << "\n"
 		<< " Magic find: " << this->magicFind << "\n"

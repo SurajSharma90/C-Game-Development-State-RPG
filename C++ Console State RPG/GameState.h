@@ -6,6 +6,7 @@
 #include<stack>
 #include "State.h"
 #include "Character.h"
+#include "Enemy.h"
 #include "CharacterMenuState.h"
 #include "TravelMenuState.h"
 

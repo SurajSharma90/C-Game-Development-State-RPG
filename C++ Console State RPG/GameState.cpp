@@ -10,6 +10,7 @@ GameState::GameState(
 
 GameState::~GameState()
 {
+
 }
 
 //Functions
@@ -22,7 +23,8 @@ void GameState::printMenu() const
 		<< " (1) Character Menu" << "\n"
 		<< " (2) Shop Menu" << "\n"
 		<< " (3) Travel Menu" << "\n"
-		<< " (4) Rest Menu" << "\n" << "\n";
+		<< " (4) Rest Menu" << "\n"
+		<< "\n";
 }
 
 void GameState::updateMenu()
@@ -43,6 +45,13 @@ void GameState::updateMenu()
 
 	case 3:
 		this->states->push(new TravelMenuState(this->character, this->states));
+		break;
+
+	case 4:
+		system("cls");
+		this->character->reset();
+		cout << "You have rested..." << "\n";
+		system("pause");
 		break;
 
 	default:

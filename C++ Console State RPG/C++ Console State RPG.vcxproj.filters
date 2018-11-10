@@ -45,7 +45,19 @@
     <ClCompile Include="CharacterSelectorState.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CombatState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
     <ClCompile Include="TravelMenuState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,7 +86,19 @@
     <ClInclude Include="CharacterSelectorState.h">
       <Filter>States</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatState.h">
+      <Filter>States</Filter>
+    </ClInclude>
     <ClInclude Include="TravelMenuState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

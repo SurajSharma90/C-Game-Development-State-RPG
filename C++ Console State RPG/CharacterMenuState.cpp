@@ -22,7 +22,8 @@ void CharacterMenuState::printMenu()
 		<< " (1) Name & Bio" << "\n"
 		<< " (2) Stats" << "\n"
 		<< " (3) Assign statpoints" << "\n"
-		<< " (4) Level Up" << "\n" << "\n";
+		<< " (4) Level Up" << "\n"
+		<< " (5) Inventory" << "\n" << "\n";
 }
 
 void CharacterMenuState::updateMenu()
@@ -58,6 +59,11 @@ void CharacterMenuState::updateMenu()
 			cout << " - Not enough EXP! - " << "\n";
 			system("PAUSE");
 		}
+		break;
+	case 5:
+		system("CLS");
+		cout << this->character->getInventory().toString() << "\n";
+		system("PAUSE");
 		break;
 	default:
 		system("CLS");

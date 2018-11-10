@@ -1,8 +1,5 @@
-﻿  CharacterMenuState.cpp
-  Game.cpp
-  GameState.cpp
-  main.cpp
-  MainMenuState.cpp
-  TravelMenuState.cpp
-  Generating Code...
+﻿  Character.cpp
+h:\youtube projects\c---state-rpg\c++ console state rpg\character.h(79): warning C4244: 'return': conversion from 'const float' to 'const int', possible loss of data
+h:\youtube projects\c---state-rpg\c++ console state rpg\character.cpp(16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+h:\youtube projects\c---state-rpg\c++ console state rpg\character.cpp(151): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   C++ Console State RPG.vcxproj -> H:\YOUTUBE PROJECTS\C---State-RPG\x64\Debug\C++ Console State RPG.exe
