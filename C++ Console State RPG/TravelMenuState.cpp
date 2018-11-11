@@ -8,8 +8,6 @@ TravelMenuState::TravelMenuState(
 	this->states = states;
 	this->locationString = "NONE";
 	this->nrOfLocations = 5;
-
-	this->updateEncounterMenu();
 }
 
 TravelMenuState::~TravelMenuState()
@@ -30,22 +28,26 @@ void TravelMenuState::travel()
 void TravelMenuState::printMenu()
 {
 	system("CLS");
-	cout << " --- Travel Menu ---" << "\n" 
+	cout << gui::msg_menutitle("Travel Menu");
+
+	cout
+		<< this->character->getMenuBar();
+
+	cout
 		<< "\n"
-		<< this->character->getMenuBar() << "\n" 
+		<< std::string(4, ' ') << this->character->toStringPosition()
 		<< "\n"
-		<< this->character->toStringPosition() << "\n"
+		<< std::string(4, ' ') << "Location: " << this->locationString << "\n"
 		<< "\n"
-		<< "Location: " << this->locationString << "\n"
-		<< "\n"
-		<< "Minimap: " << "\n" << this->minimapString << "\n"
-		<< "\n"
-		<< " (-1) Back to menu" << "\n" 
-		<< " (1) UP" << "\n"
-		<< " (2) DOWN" << "\n"
-		<< " (3) LEFT" << "\n"
-		<< " (4) RIGHT" << "\n"
-		<< "\n";
+		<< std::string(4, ' ') << "Minimap: " << "\n" << this->minimapString << "\n";
+
+	cout
+		<< gui::msg_menudivider(40, '-')
+		<< gui::msg_menuitem(-1, "Back to menu")
+		<< gui::msg_menuitem(1, "UP")
+		<< gui::msg_menuitem(2, "DOWN")
+		<< gui::msg_menuitem(3, "LEFT")
+		<< gui::msg_menuitem(4, "RIGHT");
 }
 
 void TravelMenuState::updateEncounterMenu()

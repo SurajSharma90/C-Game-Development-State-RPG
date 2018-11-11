@@ -1,6 +1,7 @@
 #include "CharacterMenuState.h"
 
-CharacterMenuState::CharacterMenuState(Character*& character,
+CharacterMenuState::CharacterMenuState(
+	Character*& character,
 	stack<State*>* states)
 	: character(character), State()
 {
@@ -16,14 +17,18 @@ CharacterMenuState::~CharacterMenuState()
 void CharacterMenuState::printMenu()
 {
 	system("CLS");
-	cout << " --- Character Menu ---" << "\n" << "\n"
-		<< this->character->getMenuBar() << "\n" << "\n"
-		<< " (-1) Back to menu" << "\n"
-		<< " (1) Name & Bio" << "\n"
-		<< " (2) Stats" << "\n"
-		<< " (3) Assign statpoints" << "\n"
-		<< " (4) Level Up" << "\n"
-		<< " (5) Inventory" << "\n" << "\n";
+	cout << gui::msg_menutitle("Character Menu");
+
+	cout << this->character->getMenuBar();
+
+	cout
+		<< gui::msg_menudivider(40, '-')
+		<< gui::msg_menuitem(-1, "Back to menu.")
+		<< gui::msg_menuitem(1, "Name & Bio.")
+		<< gui::msg_menuitem(2, "Stats.")
+		<< gui::msg_menuitem(3, "Assign statpoints.")
+		<< gui::msg_menuitem(4, "Inventory.")
+		<< gui::msg_menudivider(40, '-');
 }
 
 void CharacterMenuState::updateMenu()
@@ -44,30 +49,16 @@ void CharacterMenuState::updateMenu()
 		system("PAUSE");
 		break;
 	case 3:
-
+		this->states->push(new CharacterStatMenuState(this->character, this->states));
 		break;
 	case 4:
-		if (this->character->canLevelUp())
-		{
-			system("CLS");
-			cout << " - LEVEL UP - !"  << "\n";
-			system("PAUSE");
-		}
-		else
-		{
-			system("CLS");
-			cout << " - Not enough EXP! - " << "\n";
-			system("PAUSE");
-		}
-		break;
-	case 5:
 		system("CLS");
 		cout << this->character->getInventory().toString() << "\n";
 		system("PAUSE");
 		break;
 	default:
 		system("CLS");
-		cout << "Not a valid option! " << "\n";
+		cout << gui::msg_error("Not a valid option.");
 		system("PAUSE");
 		break;
 	}

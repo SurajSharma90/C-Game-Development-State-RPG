@@ -17,14 +17,18 @@ GameState::~GameState()
 void GameState::printMenu() const
 {
 	system("CLS");
-	cout << " --- GAME MENU ---" << "\n" << "\n"
-		<< this->character->getMenuBar() << "\n" << "\n"
-		<< " (-1) Quit to Main Menu" << "\n"
-		<< " (1) Character Menu" << "\n"
-		<< " (2) Shop Menu" << "\n"
-		<< " (3) Travel Menu" << "\n"
-		<< " (4) Rest Menu" << "\n"
-		<< "\n";
+	cout << gui::msg_menutitle("Game Menu");
+
+	cout << this->character->getMenuBar();
+
+	cout
+		<< gui::msg_menudivider(40, '-')
+		<< gui::msg_menuitem(-1, "Quit to main menu.")
+		<< gui::msg_menuitem(1, "Character Menu.")
+		<< gui::msg_menuitem(2, "Shop Menu.")
+		<< gui::msg_menuitem(3, "Travel Menu.")
+		<< gui::msg_menuitem(4, "Rest Menu.")
+		<< gui::msg_menudivider(40, '-');
 }
 
 void GameState::updateMenu()

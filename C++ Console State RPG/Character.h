@@ -10,6 +10,8 @@
 
 //(50/3) * (pow(x, 3) - 6*pow(x, 2) + (x * 17) - 12);
 
+enum attributes { STRENGTH = 0, VITALITY, AGILITY, DEXTERITY, INTELLIGENCE};
+
 class Character
 {
 private:
@@ -34,7 +36,7 @@ private:
 	int manaMax;
 
 	//attributes
-	int strenght; //Damage
+	int strength; //Damage
 	int vitality; //HP and stamina
 	int agility; //Defence and doge chance
 	int dexterity; //Hit chance and crit
@@ -78,6 +80,7 @@ public:
 	inline const int getDefence() const { return this->defence; }
 	inline const int getHitRating() const { return this->hitRating; }
 	inline Inventory& getInventory() { return this->inventory; }
+	const int getAttribute(const unsigned attribute);
 
 	//Modifiers
 	void setPosition(const unsigned x, const unsigned y);
@@ -88,9 +91,9 @@ public:
 	void reset();
 	void takeDamage(const int damage);
 	void setDead();
-	void addExp(const unsigned exp);
-	bool canLevelUp();
-	const std::string getMenuBar();
+	bool addExp(const unsigned exp);
+	bool addStatpoint(const unsigned attribute);
+	const std::string getMenuBar(const bool show_attributes = false);
 	const std::string toString();
 	const std::string toStringPosition();
 	const std::string toStringNameBio();

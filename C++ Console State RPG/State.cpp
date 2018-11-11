@@ -24,7 +24,7 @@ int State::getChoice() const
 {
 	int choice = 0;
 
-	cout << " - Enter choice: ";
+	cout << std::string(4, ' ') << " | - [[ Enter choice: ";
 	cin >> setw(1) >> choice;
 
 	while (!cin.good())
@@ -34,9 +34,11 @@ int State::getChoice() const
 		cin.clear();
 		cin.ignore(INT_MAX, '\n');
 
-		cout << " - Enter choice: ";
+		cout << std::string(4, ' ') << " | - [[ Enter choice: ";
 		cin >> setw(1) >> choice;
 	}
+
+	std::cout << "\n";
 
 	cin.clear();
 	cin.ignore(INT_MAX, '\n');

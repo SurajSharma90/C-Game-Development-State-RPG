@@ -143,6 +143,7 @@
     <ClCompile Include="CharacterCreatorState.cpp" />
     <ClCompile Include="CharacterMenuState.cpp" />
     <ClCompile Include="CharacterSelectorState.cpp" />
+    <ClCompile Include="CharacterStatMenuState.cpp" />
     <ClCompile Include="CombatState.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -151,14 +152,17 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="msg_functions.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TravelMenuState.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterCreatorState.h" />
     <ClInclude Include="CharacterMenuState.h" />
     <ClInclude Include="CharacterSelectorState.h" />
+    <ClInclude Include="CharacterStatMenuState.h" />
     <ClInclude Include="CombatState.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
@@ -166,8 +170,10 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="msg_functions.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="TravelMenuState.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

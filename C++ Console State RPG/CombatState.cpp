@@ -1,8 +1,9 @@
 #include "CombatState.h"
 
-CombatState::CombatState(Character*& character,
-	stack<State*>*states)
-	: State(), character(character)
+CombatState::CombatState(
+	Character*& character,
+	stack<State*>* states)
+	: character(character), State()
 
 {
 	this->states = states;
@@ -60,12 +61,12 @@ void CombatState::beginCombat()
 
 			if (turn)
 			{
-				damage = rand() % this->character->getDamageMax() + this->character->getDamageMin();
+				damage = rand() % (this->character->getDamageMax() - this->character->getDamageMin()) + this->character->getDamageMin();
 				enemy.takeDamage(damage);
 			}
 			else
 			{
-				damage = rand() % enemy.getDamageMax() + enemy.getDamageMin();
+				damage = rand() % (enemy.getDamageMax() - enemy.getDamageMin()) + enemy.getDamageMin();
 				this->character->takeDamage(damage);
 			}
 
@@ -98,7 +99,7 @@ void CombatState::beginCombat()
 		else if (enemy.isDead())
 		{
 			endCombat = true;
-			int gainedExp = rand() % (enemy.getLevel() * 10) + 1;
+			int gainedExp = rand() % (enemy.getLevel() * 20) + (enemy.getLevel() * 10);
 			this->character->addExp(gainedExp);
 			cout << "YOU DEFEATED THE ENEMY AND GAINED " << gainedExp << " EXP!" << "\n";
 			this->setQuit(true);
@@ -130,6 +131,7 @@ void CombatState::updateMenu()
 		this->beginCombat();
 		cout << "END OF COMBAT." << "\n";
 		system("pause");
+		//this->setQuit(true);
 		break;
 
 	case 2:

@@ -21,17 +21,20 @@ MainMenuState::~MainMenuState()
 void MainMenuState::printMenu()
 {
 	system("CLS");
-	cout << " --- Main Menu ---" << "\n" << "\n";
+	cout << gui::msg_menutitle("Main Menu");
 
 	if (!this->characterList->empty())
-		cout << this->characterList->at(this->activeCharacter)->getMenuBar() << "\n" << "\n";
+		cout << this->characterList->at(this->activeCharacter)->getMenuBar();
 	else
-		cout << " No character selected!" << "\n" << "\n";
+		cout << gui::msg_error("No character selected.");
 
-	cout << " (-1) Quit to desktop" << "\n"
-		<< " (1) Start Game" << "\n"
-		<< " (2) Create Character" << "\n"
-		<< " (3) Select Character" << "\n" << "\n";
+	cout 
+		<< gui::msg_menudivider(40, '-')
+		<< gui::msg_menuitem(-1, "Quit to desktop. ")
+		<< gui::msg_menuitem(1, "Start game. ")
+		<< gui::msg_menuitem(2, "Create character. ")
+		<< gui::msg_menuitem(3, "Select character. ")
+		<< gui::msg_menudivider(40, '-');
 }
 
 void MainMenuState::updateMenu()
@@ -47,7 +50,7 @@ void MainMenuState::updateMenu()
 		else
 		{
 			system("CLS");
-			cout << "Error! Create a character first!" << "\n";
+			cout << "  [[ (!) Error. Create a character first. ]]" << "\n";
 			system("PAUSE");
 		}
 		break;
@@ -59,7 +62,7 @@ void MainMenuState::updateMenu()
 		break;
 	default:
 		system("CLS");
-		cout << "Not a valid option! " << "\n";
+		cout << "  [[ (!) Not a valid option. ]]" << "\n";
 		system("PAUSE");
 		break;
 	}

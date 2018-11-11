@@ -1,6 +1,8 @@
 #pragma once
+
 #include<iostream>
 #include<iomanip>
+#include"msg_functions.h"
 
 using namespace std;
 

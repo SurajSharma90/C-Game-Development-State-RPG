@@ -4,7 +4,7 @@
 #include<iomanip>
 #include<stack>
 #include "Character.h"
-#include "State.h"
+#include "CharacterStatMenuState.h"
 
 using namespace std;
 

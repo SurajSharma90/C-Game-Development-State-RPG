@@ -10,8 +10,8 @@ void Character::updateStats()
 	this->manaMax = this->vitality * 10 + this->vitality;
 	this->mana = this->manaMax;
 
-	this->damageMin = this->strenght * 2;
-	this->damageMax = this->strenght + this->strenght * 2;
+	this->damageMin = this->strength * 2;
+	this->damageMax = this->strength + this->strength * 2;
 	this->defence = this->agility * 2;
 	this->hitRating = this->dexterity * 2 + this->dexterity;
 	this->critChance = static_cast<float>(this->dexterity) / 60;
@@ -27,17 +27,17 @@ Character::Character(std::string name, std::string bio)
 	this->name = name;
 	this->bio = bio;
 	this->level = 1;
-	this->exp = 1000;
+	this->exp = 0;
 	this->expNext = 46;
-	this->statpoints = 0;
+	this->statpoints = 5;
 
-	this->strenght = 1;
+	this->strength = 1;
 	this->vitality = 1;
 	this->agility = 1;
 	this->dexterity = 1;
 	this->intelligence = 1;
 
-	this->gold = 0;
+	this->gold = 100;
 
 	this->updateStats();
 
@@ -51,6 +51,33 @@ Character::~Character()
 
 }
 
+//Accessors
+const int Character::getAttribute(const unsigned attribute)
+{
+	switch (attribute)
+	{
+	case STRENGTH:
+		return this->strength;
+		break;
+	case VITALITY:
+		return this->vitality;
+		break;
+	case AGILITY:
+		return this->agility;
+		break;
+	case DEXTERITY:
+		return this->dexterity;
+		break;
+	case INTELLIGENCE:
+		return this->intelligence;
+		break;
+	default:
+		return -1;
+		break;
+	}
+}
+
+//Modifiers
 void Character::setPosition(const unsigned x, const unsigned y)
 {
 	this->x = x;
@@ -122,19 +149,63 @@ void Character::setDead()
 		this->gold = 0;
 }
 
-void Character::addExp(const unsigned exp)
+bool Character::addExp(const unsigned exp)
 {
-	this->exp += exp;
-}
+	bool levelup = false;
 
-bool Character::canLevelUp()
-{
-	if (this->exp >= this->expNext)
+	this->exp += exp;
+
+	while (this->exp >= this->expNext)
 	{
 		this->level++;
 		this->exp -= this->expNext;
 		this->expNext = (50 / 3) * (pow(this->level, 3) - 6 * pow(this->level, 2) + (this->level * 17) - 12);
 		this->statpoints++;
+
+		this->strength += this->level % 2;
+		this->vitality += this->level % 2;
+		this->agility += this->level % 2;
+		this->dexterity += this->level % 2;
+		this->intelligence += this->level % 2;
+
+		levelup = true;
+	}
+
+	this->updateStats();
+
+	return levelup;
+}
+
+bool Character::addStatpoint(const unsigned attribute)
+{
+	if (this->statpoints > 0)
+	{
+		this->statpoints--;
+
+		switch (attribute)
+		{
+		case STRENGTH:
+			this->strength++;
+			break;
+		case VITALITY:
+			this->vitality++;
+			break;
+		case AGILITY:
+			this->agility++;
+			break;
+		case DEXTERITY:
+			this->dexterity++;
+			break;
+		case INTELLIGENCE:
+			this->intelligence++;
+			break;
+		default:
+			this->statpoints++;
+			return false;
+			break;
+		}
+
+		this->updateStats();
 
 		return true;
 	}
@@ -142,16 +213,32 @@ bool Character::canLevelUp()
 	return false;
 }
 
-const std::string Character::getMenuBar()
+const std::string Character::getMenuBar(const bool show_attributes)
 {
 	std::stringstream ss;
 
-	ss << " Name: " << this->name << " | "
-		<< "Level: " << this->level << " | "
-		<< "Exp: " << this->exp << " / " << this->expNext << " | "
-		<< "HP: " << this->hp << " / " << this->hpMax << " | "
-		<< "Stamina: " << this->stamina << " / " << this->staminaMax << "\n"
-		<< " Stat points available: " << this->statpoints;
+	int expDone = 10 * (static_cast<float>(this->exp) / this->expNext);
+	int expRemain = 10 - expDone;
+
+	ss
+		<< std::string(4, ' ') << " | Name: " << this->name << "\n"
+		<< std::string(4, ' ') << " | Level: " << this->level << " [" << std::string(expDone, '=') << std::string(expRemain, '-') << "]" << "\n"
+		<< std::string(4, ' ') << " | HP: " << this->hp << " / " << this->hpMax << "\n"
+		<< std::string(4, ' ') << " | Stamina: " << this->stamina << " / " << this->staminaMax << "\n"
+		<< std::string(4, ' ') << " | Stat points available: " << this->statpoints << "\n";
+	
+	if (show_attributes)
+	{
+		ss
+			<< "\n"
+			<< std::string(4, ' ') << " | Strength: " << this->strength << "\n"
+			<< std::string(4, ' ') << " | Vitality: " << this->vitality << "\n"
+			<< std::string(4, ' ') << " | Agility: " << this->agility << "\n"
+			<< std::string(4, ' ') << " | Dexterity: " << this->dexterity << "\n"
+			<< std::string(4, ' ') << " | Intelligence: " << this->intelligence << "\n";
+	}
+
+	ss << "\n";
 
 	return ss.str();
 }
@@ -170,7 +257,7 @@ const std::string Character::toString()
 		<< " Exp: " << this->exp << " / " << this->expNext << "\n"
 		<< "\n"
 
-		<< " Strenght: " << this->strenght << "\n"
+		<< " Strenght: " << this->strength << "\n"
 		<< " Vitality: " << this->vitality << "\n"
 		<< " Agility: " << this->agility << "\n"
 		<< " Dexterity: " << this->dexterity << "\n"
@@ -222,7 +309,7 @@ const std::string Character::toStringStats()
 		<< " Exp: " << this->exp << " / " << this->expNext << "\n" 
 		<< "\n"
 
-		<< " Strenght: " << this->strenght << "\n"
+		<< " Strenght: " << this->strength << "\n"
 		<< " Vitality: " << this->vitality << "\n"
 		<< " Agility: " << this->agility << "\n"
 		<< " Dexterity: " << this->dexterity << "\n"
