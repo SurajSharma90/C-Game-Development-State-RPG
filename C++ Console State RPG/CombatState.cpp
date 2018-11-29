@@ -61,7 +61,7 @@ void CombatState::beginCombat()
 
 			if (turn)
 			{
-				damage = rand() % (this->character->getDamageMax() - this->character->getDamageMin()) + this->character->getDamageMin();
+				damage = character->getTotalDamage();
 				enemy.takeDamage(damage);
 			}
 			else

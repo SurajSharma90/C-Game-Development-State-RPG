@@ -63,7 +63,9 @@ void TravelMenuState::updateEncounterMenu()
 		{
 			this->locationString = "You are in an empty plane.";
 
+			srand(time(NULL));
 			int randomnr = rand() % 2;
+
 			if (randomnr)
 			{
 				system("cls");

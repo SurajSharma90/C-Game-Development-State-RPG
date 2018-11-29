@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Item.h"
+
 class Weapon :
 	public Item
 {
@@ -18,6 +20,11 @@ public:
 
 	virtual ~Weapon();
 
+	//Accessors
+	inline const int& getDamageMax() const { return this->damageMax; }
+	inline const int& getDamageMin() const { return this->damageMin; }
+
 	//Functions
+	const std::string toString();
 };
 

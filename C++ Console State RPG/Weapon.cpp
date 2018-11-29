@@ -18,4 +18,13 @@ Weapon::~Weapon()
 
 }
 
+const std::string Weapon::toString()
+{
+	std::stringstream ss;
+
+	ss << this->getName() << " | Rarity: " << this->getRarity() << " | Damage: " << this->damageMin << " - " << this->damageMax;
+
+	return ss.str();
+}
+
 //Functions

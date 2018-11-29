@@ -54,6 +54,8 @@ private:
 	//Skills
 
 	//Weapon
+	Weapon* weapon;
+
 	//Armor
 
 	//Inventory
@@ -75,12 +77,13 @@ public:
 	inline const int getHP() const { return this->hp; }
 	inline const int getHPMax() const { return this->hpMax; }
 	inline const int getStamina() const { return this->stamina; }
-	inline const int getDamageMin() const { return this->damageMin; }
-	inline const int getDamageMax() const { return this->damageMax; }
+	const int getDamageMin() const;
+	const int getDamageMax() const;
 	inline const int getDefence() const { return this->defence; }
 	inline const int getHitRating() const { return this->hitRating; }
 	inline Inventory& getInventory() { return this->inventory; }
 	const int getAttribute(const unsigned attribute);
+	const int getTotalDamage() const;
 
 	//Modifiers
 	void setPosition(const unsigned x, const unsigned y);
@@ -89,6 +92,7 @@ public:
 	//Functions
 	const std::string flee();
 	void reset();
+	void resetHP();
 	void takeDamage(const int damage);
 	void setDead();
 	bool addExp(const unsigned exp);

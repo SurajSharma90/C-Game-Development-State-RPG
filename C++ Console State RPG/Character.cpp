@@ -4,7 +4,7 @@
 void Character::updateStats()
 {
 	this->hpMax = this->vitality * 10 + this->vitality;
-	this->hp = this->hpMax;
+	//this->hp = this->hpMax;
 	this->staminaMax = this->vitality * 2;
 	this->stamina = this->staminaMax;
 	this->manaMax = this->vitality * 10 + this->vitality;
@@ -12,6 +12,13 @@ void Character::updateStats()
 
 	this->damageMin = this->strength * 2;
 	this->damageMax = this->strength + this->strength * 2;
+
+	if (this->weapon)
+	{
+		this->damageMin += this->weapon->getDamageMin();
+		this->damageMax += this->weapon->getDamageMax();
+	}
+
 	this->defence = this->agility * 2;
 	this->hitRating = this->dexterity * 2 + this->dexterity;
 	this->critChance = static_cast<float>(this->dexterity) / 60;
@@ -39,7 +46,10 @@ Character::Character(std::string name, std::string bio)
 
 	this->gold = 100;
 
+	this->weapon = new Weapon(2, 4, "Sword", 0, 1, 200);
+
 	this->updateStats();
+	this->resetHP();
 
 	this->inventory.add(Item("test", 0, 1, 200));
 
@@ -48,7 +58,7 @@ Character::Character(std::string name, std::string bio)
 
 Character::~Character()
 {
-
+	delete this->weapon;
 }
 
 //Accessors
@@ -75,6 +85,30 @@ const int Character::getAttribute(const unsigned attribute)
 		return -1;
 		break;
 	}
+}
+
+const int Character::getDamageMin() const
+{
+	if (this->weapon)
+		return this->damageMin + this->weapon->getDamageMin();
+
+	return this->damageMin;
+}
+
+const int Character::getDamageMax() const
+{
+	if (this->weapon)
+		return this->damageMax + this->weapon->getDamageMax();
+
+	return this->damageMax;
+}
+
+const int Character::getTotalDamage() const
+{
+	if(this->weapon)
+		return rand() % ((this->damageMax + this->weapon->getDamageMax()) - (this->damageMin + this->weapon->getDamageMin())) + (this->damageMin + this->weapon->getDamageMin());
+
+	return rand() % (this->damageMax - this->damageMin) + this->damageMin;
 }
 
 //Modifiers
@@ -125,6 +159,11 @@ void Character::reset()
 	this->mana = this->manaMax;
 }
 
+void Character::resetHP()
+{
+	this->hp = this->hpMax;
+}
+
 void Character::takeDamage(const int damage)
 {
 	this->hp -= damage;
@@ -169,9 +208,10 @@ bool Character::addExp(const unsigned exp)
 		this->intelligence += this->level % 2;
 
 		levelup = true;
-	}
 
-	this->updateStats();
+		this->updateStats();
+		this->resetHP();
+	}
 
 	return levelup;
 }
@@ -206,6 +246,7 @@ bool Character::addStatpoint(const unsigned attribute)
 		}
 
 		this->updateStats();
+		this->resetHP();
 
 		return true;
 	}
@@ -269,7 +310,10 @@ const std::string Character::toString()
 		<< " Mana: " << this->mana << " / " << this->manaMax << "\n"
 		<< "\n"
 
-		<< " Damage: " << this->damageMin << " - " << this->damageMax << "\n"
+		<< " Weapon: " << this->weapon->toString() << "\n"
+		<< "\n"
+
+		<< " Damage: " << this->damageMin + this->weapon->getDamageMin() << " - " << this->damageMax + this->weapon->getDamageMax() << "\n"
 		<< " Defence: " << this->defence << "\n"
 		<< " Hit rating: " << this->hitRating << "\n"
 		<< " Crit chance: " << this->critChance << "\n"
@@ -321,7 +365,10 @@ const std::string Character::toStringStats()
 		<< " Mana: " << this->mana << " / " << this->manaMax << "\n"
 		<< "\n"
 
-		<< " Damage: " << this->damageMin << " - " << this->damageMax << "\n"
+		<< " Weapon: " << this->weapon->toString() << "\n"
+		<< "\n"
+
+		<< " Damage: " << this->damageMin + this->weapon->getDamageMin() << " - " << this->damageMax + this->weapon->getDamageMax() << "\n"
 		<< " Defence: " << this->defence << "\n"
 		<< " Hit rating: " << this->hitRating << "\n"
 		<< " Crit chance: " << this->critChance << "\n"
