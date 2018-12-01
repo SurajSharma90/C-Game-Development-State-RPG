@@ -5,6 +5,7 @@
 #include<stack>
 #include "Character.h"
 #include "CharacterStatMenuState.h"
+#include "CharacterInventoryState.h"
 
 using namespace std;
 

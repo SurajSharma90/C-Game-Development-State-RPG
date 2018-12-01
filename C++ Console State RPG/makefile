@@ -1,7 +1,7 @@
 PROG = main
 CC = g++
 CPPFLAGS = -Wall -O2
-OBJS = main.o Game.o Character.o CharacterCreatorState.o CharacterMenuState.o CharacterSelectorState.o CharacterStatMenuState.o CombatState.o GameState.o Enemy.o Inventory.o Item.o MainMenuState.o msg_functions.o State.o TravelMenuState.o Weapon.o
+OBJS = main.o Game.o Character.o CharacterCreatorState.o CharacterMenuState.o CharacterSelectorState.o CharacterStatMenuState.o CombatState.o GameState.o Enemy.o Inventory.o Item.o MainMenuState.o msg_functions.o State.o TravelMenuState.o Weapon.o CharacterInventoryState.o
 
 $(PROG) : $(OBJS)
 	$(CC) -o $(PROG) $(OBJS)
@@ -56,6 +56,9 @@ TravelMenuState.o : TravelMenuState.h
 
 Weapon.o : Weapon.h
 	$(CC) $(CPPFLAGS) -c Weapon.cpp
+
+CharacterInventoryState.o : CharacterInventoryState.h
+	$(CC) $(CPPFLAGS) -c CharacterInventoryState.cpp
 
 clean :
 	rm -f core $(PROG) $(OBJS)

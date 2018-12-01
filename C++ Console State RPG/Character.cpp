@@ -414,3 +414,21 @@ const std::string Character::toStringStats()
 
 	return ss.str();
 }
+
+const std::string Character::toStringEquipped() const
+{
+	std::stringstream ss;
+
+	if (this->weapon)
+	{
+		ss << " Weapon: " << this->weapon->toString() << "\n"
+			<< "\n";
+	}
+	else
+	{
+		ss << " Weapon: " << "None equipped" << "\n"
+			<< "\n";
+	}
+
+	return ss.str();
+}

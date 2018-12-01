@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterCreatorState.cpp" />
+    <ClCompile Include="CharacterInventoryState.cpp" />
     <ClCompile Include="CharacterMenuState.cpp" />
     <ClCompile Include="CharacterSelectorState.cpp" />
     <ClCompile Include="CharacterStatMenuState.cpp" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterCreatorState.h" />
+    <ClInclude Include="CharacterInventoryState.h" />
     <ClInclude Include="CharacterMenuState.h" />
     <ClInclude Include="CharacterSelectorState.h" />
     <ClInclude Include="CharacterStatMenuState.h" />

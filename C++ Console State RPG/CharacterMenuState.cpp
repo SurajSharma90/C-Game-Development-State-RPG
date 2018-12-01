@@ -52,9 +52,7 @@ void CharacterMenuState::updateMenu()
 		this->states->push(new CharacterStatMenuState(this->character, this->states));
 		break;
 	case 4:
-		system("CLS");
-		cout << this->character->getInventory().toString() << "\n";
-		system("PAUSE");
+		this->states->push(new CharacterInventoryState(this->character, this->states));
 		break;
 	default:
 		system("CLS");

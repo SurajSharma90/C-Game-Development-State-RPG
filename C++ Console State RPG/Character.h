@@ -105,5 +105,6 @@ public:
 	const std::string toStringPosition();
 	const std::string toStringNameBio();
 	const std::string toStringStats();
+	const std::string toStringEquipped() const;
 };
 
