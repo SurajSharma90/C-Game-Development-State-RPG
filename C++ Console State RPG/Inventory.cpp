@@ -49,7 +49,7 @@ Inventory::Inventory(const Inventory& other)
 
 	for (size_t i = 0; i < this->nrOfItems; i++)
 	{
-		this->items[i] = new Item(*other.items[i]);
+		this->items[i] = other.items[i]->clone();
 	}
 }
 
@@ -83,7 +83,7 @@ void Inventory::operator=(const Inventory& other)
 
 		for (size_t i = 0; i < this->nrOfItems; i++)
 		{
-			this->items[i] = new Item(*other.items[i]);
+			this->items[i] = other.items[i]->clone();
 		}
 	}
 }
@@ -125,7 +125,7 @@ void Inventory::add(const Item & item)
 	if (this->nrOfItems >= this->cap)
 		this->expand();
 
-	this->items[this->nrOfItems++] = new Item(item);
+	this->items[this->nrOfItems++] = item.clone();
 }
 
 void Inventory::remove(const unsigned index)
@@ -137,9 +137,13 @@ std::string Inventory::toString() const
 {
 	std::stringstream ss;
 
+	ss << gui::msg_menutitle("Inventory Menu");
+
+	ss << gui::msg_menudivider(40, '-');
+
 	for (size_t i = 0; i < this->nrOfItems; i++)
 	{
-		ss << i << ": " << this->items[i]->toString() << "\n";
+		ss << gui::msg_menuitem(i, this->items[i]->toString());
 	}
 
 	return ss.str();

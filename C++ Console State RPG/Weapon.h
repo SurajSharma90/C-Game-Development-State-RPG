@@ -25,6 +25,7 @@ public:
 	inline const int& getDamageMin() const { return this->damageMin; }
 
 	//Functions
-	const std::string toString();
+	Weapon* clone() const;
+	const std::string toString() const;
 };
 

@@ -53,8 +53,15 @@ void GameState::updateMenu()
 
 	case 4:
 		system("cls");
-		this->character->reset();
-		cout << "You have rested..." << "\n";
+		if (this->character->getLocation() == CITY)
+		{
+			this->character->reset();
+			cout << "You have rested..." << "\n";
+		}
+		else
+		{
+			cout << "You need to be in a city to rest!" << "\n";
+		}
 		system("pause");
 		break;
 

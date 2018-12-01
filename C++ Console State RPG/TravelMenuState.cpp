@@ -56,6 +56,7 @@ void TravelMenuState::updateEncounterMenu()
 	{
 		srand(this->character->getSeed());
 		int location = rand() % this->nrOfLocations;
+		this->character->setLocation(location);
 
 		switch (location)
 		{

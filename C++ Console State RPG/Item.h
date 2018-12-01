@@ -24,12 +24,15 @@ public:
 	virtual ~Item();
 
 	//Accessors
-	const std::string& getName();
-	const unsigned& getType();
-	const unsigned& getRarity();
-	const unsigned& getValue();
+	const std::string& getName() const;
+	const unsigned& getType() const;
+	const std::string getTypeAsString() const;
+	const unsigned& getRarity() const;
+	const std::string getRarityAsString() const;
+	const unsigned& getValue() const;
 
 	//Functions
-	const std::string toString() const;
+	virtual Item* clone() const = 0;
+	virtual const std::string toString() const = 0;
 };
 

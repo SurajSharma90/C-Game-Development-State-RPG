@@ -37,6 +37,7 @@ Character::Character(std::string name, std::string bio)
 	this->exp = 0;
 	this->expNext = 46;
 	this->statpoints = 5;
+	this->location = -1;
 
 	this->strength = 1;
 	this->vitality = 1;
@@ -46,12 +47,12 @@ Character::Character(std::string name, std::string bio)
 
 	this->gold = 100;
 
-	this->weapon = new Weapon(2, 4, "Sword", 0, 1, 200);
+	this->weapon = new Weapon(2, 4, "Sword", WEAPON, COMMON, 200);
 
 	this->updateStats();
 	this->resetHP();
 
-	this->inventory.add(Item("test", 0, 1, 200));
+	this->inventory.add(Weapon(5, 10, "test", 0, 1, 200));
 
 	//Initialize attributes and core stats
 }
@@ -109,6 +110,11 @@ const int Character::getTotalDamage() const
 		return rand() % ((this->damageMax + this->weapon->getDamageMax()) - (this->damageMin + this->weapon->getDamageMin())) + (this->damageMin + this->weapon->getDamageMin());
 
 	return rand() % (this->damageMax - this->damageMin) + this->damageMin;
+}
+
+void Character::setLocation(const int location)
+{
+	this->location = location;
 }
 
 //Modifiers
@@ -308,13 +314,27 @@ const std::string Character::toString()
 		<< " HP: " << this->hp << " / " << this->hpMax << "\n"
 		<< " Stamina: " << this->stamina << " / " << this->staminaMax << "\n"
 		<< " Mana: " << this->mana << " / " << this->manaMax << "\n"
-		<< "\n"
+		<< "\n";
 
-		<< " Weapon: " << this->weapon->toString() << "\n"
-		<< "\n"
+	if (this->weapon)
+	{
+		ss << " Weapon: " << this->weapon->toString() << "\n"
+			<< "\n";
 
-		<< " Damage: " << this->damageMin + this->weapon->getDamageMin() << " - " << this->damageMax + this->weapon->getDamageMax() << "\n"
-		<< " Defence: " << this->defence << "\n"
+		ss << " Damage: " << this->damageMin + this->weapon->getDamageMin() << " (" << this->damageMin << ") " 
+			<< " - " << this->damageMax + this->weapon->getDamageMax() << " (" << this->damageMax << ") "
+			<< "\n";
+	}
+	else
+	{
+		ss << " Weapon: " << "None equipped" << "\n"
+			<< "\n";
+
+		ss << " Damage: " << this->damageMin << " - " << this->damageMax
+			<< "\n";
+	}
+	
+		ss << " Defence: " << this->defence << "\n"
 		<< " Hit rating: " << this->hitRating << "\n"
 		<< " Crit chance: " << this->critChance << "\n"
 		<< " Magic find: " << this->magicFind << "\n"
@@ -350,7 +370,7 @@ const std::string Character::toStringStats()
 	std::stringstream ss;
 
 	ss << " Level: " << this->level << "\n"
-		<< " Exp: " << this->exp << " / " << this->expNext << "\n" 
+		<< " Exp: " << this->exp << " / " << this->expNext << "\n"
 		<< "\n"
 
 		<< " Strenght: " << this->strength << "\n"
@@ -363,13 +383,27 @@ const std::string Character::toStringStats()
 		<< " HP: " << this->hp << " / " << this->hpMax << "\n"
 		<< " Stamina: " << this->stamina << " / " << this->staminaMax << "\n"
 		<< " Mana: " << this->mana << " / " << this->manaMax << "\n"
-		<< "\n"
+		<< "\n";
 
-		<< " Weapon: " << this->weapon->toString() << "\n"
-		<< "\n"
+		if (this->weapon)
+		{
+			ss << " Weapon: " << this->weapon->toString() << "\n"
+				<< "\n";
 
-		<< " Damage: " << this->damageMin + this->weapon->getDamageMin() << " - " << this->damageMax + this->weapon->getDamageMax() << "\n"
-		<< " Defence: " << this->defence << "\n"
+			ss << " Damage: " << this->damageMin + this->weapon->getDamageMin() << " (" << this->damageMin << ") "
+				<< " - " << this->damageMax + this->weapon->getDamageMax() << " (" << this->damageMax << ") "
+				<< "\n";
+		}
+		else
+		{
+			ss << " Weapon: " << "None equipped" << "\n"
+				<< "\n";
+
+			ss << " Damage: " << this->damageMin << " - " << this->damageMax
+				<< "\n";
+		}
+
+		ss << " Defence: " << this->defence << "\n"
 		<< " Hit rating: " << this->hitRating << "\n"
 		<< " Crit chance: " << this->critChance << "\n"
 		<< " Magic find: " << this->magicFind << "\n"

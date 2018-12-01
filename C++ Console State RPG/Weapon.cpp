@@ -18,11 +18,20 @@ Weapon::~Weapon()
 
 }
 
-const std::string Weapon::toString()
+Weapon * Weapon::clone() const
+{
+	return new Weapon(*this);
+}
+
+const std::string Weapon::toString() const
 {
 	std::stringstream ss;
 
-	ss << this->getName() << " | Rarity: " << this->getRarity() << " | Damage: " << this->damageMin << " - " << this->damageMax;
+	ss << " | Name: " << this->getName()
+		<< " | Type: " << this->getTypeAsString()
+		<< " | Damage: " << this->damageMin << " - " << this->damageMax
+		<< " | Rarity: " << this->getRarityAsString() //std::string(this->getRarity(), '*')
+		<< " | Value: " << this->getValue();
 
 	return ss.str();
 }

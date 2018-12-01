@@ -26,6 +26,7 @@ private:
 	int exp;
 	int expNext;
 	int statpoints;
+	int location;
 
 	//Stats
 	int hp;
@@ -84,8 +85,10 @@ public:
 	inline Inventory& getInventory() { return this->inventory; }
 	const int getAttribute(const unsigned attribute);
 	const int getTotalDamage() const;
+	inline const int getLocation() const { return this->location; }
 
 	//Modifiers
+	void setLocation(const int location);
 	void setPosition(const unsigned x, const unsigned y);
 	void move(const int x, const int y);
 

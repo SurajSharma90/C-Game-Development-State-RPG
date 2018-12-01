@@ -26,36 +26,83 @@ Item::~Item()
 }
 
 //Accessors
-const std::string & Item::getName()
+const std::string & Item::getName() const 
 {
 	return this->name;
 }
 
-const unsigned & Item::getType()
+const unsigned & Item::getType() const 
 {
 	return this->type;
 }
 
-const unsigned & Item::getRarity()
+const std::string Item::getTypeAsString() const
+{
+	std::string typestr = "ERROR";
+
+	switch (this->type)
+	{
+	case WEAPON:
+		typestr = "Weapon";
+		break;
+
+	case ARMOR:
+		typestr = "Armor";
+		break;
+
+	default:
+		break;
+	}
+
+	return typestr;
+}
+
+const unsigned & Item::getRarity() const
 {
 	return this->rarity;
 }
 
-const unsigned & Item::getValue()
+const std::string Item::getRarityAsString() const
+{
+	std::string raritystr = "ERROR";
+
+	switch (this->type)
+	{
+	case COMMON:
+		raritystr = "Common";
+		break;
+
+	case UNCOMMON:
+		raritystr = "Uncommon";
+		break;
+
+	case RARE:
+		raritystr = "Rare";
+		break;
+
+	case EPIC:
+		raritystr = "Epic";
+		break;
+
+	case LEGENDARY:
+		raritystr = "Legendary";
+		break;
+
+	case MYTHIC:
+		raritystr = "Mythic";
+		break;
+
+	default:
+		break;
+	}
+
+	return raritystr;
+}
+
+const unsigned & Item::getValue() const
 {
 	return this->value;
 }
 
 //Functions
-const std::string Item::toString() const
-{
-	std::stringstream ss;
 
-	ss << " Name: " << this->name 
-		<< " | Type: " << this->type
-		<< " | Rarity: " << this->rarity
-		<< " | Value: " << this->value
-		<< "\n";
-
-	return ss.str();
-}
