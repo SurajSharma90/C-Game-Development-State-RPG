@@ -42,6 +42,28 @@ void CharacterInventoryState::updateMenu()
 		system("PAUSE");
 		break;
 
+	case 2:
+	{
+		system("CLS");
+		//cout << this->character->toStringEquipped() << "\n";
+		cout << this->character->getInventory().toString() << "\n";
+
+		int choice = this->getChoice();
+
+		if (choice < 0 || choice >= this->character->getInventory().size())
+			std::cout << gui::msg_error("No such item in inventory.");
+		else
+		{
+			Weapon* wep = dynamic_cast<Weapon*>(this->character->getInventory().replace(choice, this->character->getWeapon()));
+			
+			if (wep)
+			{
+				this->character->setWeapon(wep);
+			}
+		}
+
+		break;
+	}
 	default:
 		system("CLS");
 		cout << "Not a valid option!" << "\n";

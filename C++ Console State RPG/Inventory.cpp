@@ -133,6 +133,18 @@ void Inventory::remove(const unsigned index)
 
 }
 
+Item * Inventory::replace(const unsigned index, Item * item)
+{
+	if (index < 0 || index >= this->nrOfItems)
+		throw("INVENTORY::OUT OF BOUNDS!");
+
+	Item* temp = this->items[index]->clone();
+	delete this->items[index];
+	this->items[index] = item->clone();
+
+	return temp;
+}
+
 std::string Inventory::toString() const
 {
 	std::stringstream ss;

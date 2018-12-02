@@ -13,12 +13,6 @@ void Character::updateStats()
 	this->damageMin = this->strength * 2;
 	this->damageMax = this->strength + this->strength * 2;
 
-	if (this->weapon)
-	{
-		this->damageMin += this->weapon->getDamageMin();
-		this->damageMax += this->weapon->getDamageMax();
-	}
-
 	this->defence = this->agility * 2;
 	this->hitRating = this->dexterity * 2 + this->dexterity;
 	this->critChance = static_cast<float>(this->dexterity) / 60;
@@ -52,7 +46,7 @@ Character::Character(std::string name, std::string bio)
 	this->updateStats();
 	this->resetHP();
 
-	this->inventory.add(Weapon(5, 10, "test", 0, 1, 200));
+	this->inventory.add(Weapon(5, 10, "Super-Sword", WEAPON, RARE, 500));
 
 	//Initialize attributes and core stats
 }
@@ -112,12 +106,17 @@ const int Character::getTotalDamage() const
 	return rand() % (this->damageMax - this->damageMin) + this->damageMin;
 }
 
+Weapon* Character::getWeapon() 
+{
+	return this->weapon;
+}
+
+//Modifiers
 void Character::setLocation(const int location)
 {
 	this->location = location;
 }
 
-//Modifiers
 void Character::setPosition(const unsigned x, const unsigned y)
 {
 	this->x = x;
@@ -135,6 +134,11 @@ void Character::move(const int x, const int y)
 		this->y = 0;
 	else
 		this->y += y;
+}
+
+void Character::setWeapon(Weapon * weapon)
+{
+	this->weapon = weapon;
 }
 
 //Functions

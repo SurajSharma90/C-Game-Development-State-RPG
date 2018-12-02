@@ -36,6 +36,7 @@ public:
 	//Functions
 	void add(const Item& item);
 	void remove(const unsigned index);
+	Item* replace(const unsigned index, Item* item);
 	std::string toString() const;
 };
 

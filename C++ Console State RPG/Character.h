@@ -86,11 +86,13 @@ public:
 	const int getAttribute(const unsigned attribute);
 	const int getTotalDamage() const;
 	inline const int getLocation() const { return this->location; }
+	Weapon* getWeapon();
 
 	//Modifiers
 	void setLocation(const int location);
 	void setPosition(const unsigned x, const unsigned y);
 	void move(const int x, const int y);
+	void setWeapon(Weapon* weapon);
 
 	//Functions
 	const std::string flee();
