@@ -1,6 +1,7 @@
 #pragma once
 
 #include"Weapon.h"
+#include"Armor.h"
 #include"msg_functions.h"
 #include<sstream>
 #include<string>

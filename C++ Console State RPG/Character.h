@@ -58,6 +58,11 @@ private:
 	Weapon* weapon;
 
 	//Armor
+	Armor* armorHead;
+	Armor* armorChest;
+	Armor* armorShoulders;
+	Armor* armorArms;
+	Armor* armorLegs;
 
 	//Inventory
 	Inventory inventory;
@@ -87,12 +92,14 @@ public:
 	const int getTotalDamage() const;
 	inline const int getLocation() const { return this->location; }
 	Weapon* getWeapon();
+	Armor* getArmor(int armor_type);
 
 	//Modifiers
 	void setLocation(const int location);
 	void setPosition(const unsigned x, const unsigned y);
 	void move(const int x, const int y);
 	void setWeapon(Weapon* weapon);
+	void setArmor(Armor* armor, const int armor_type);
 
 	//Functions
 	const std::string flee();

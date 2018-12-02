@@ -41,12 +41,22 @@ Character::Character(std::string name, std::string bio)
 
 	this->gold = 100;
 
+	//Weapon
 	this->weapon = new Weapon(2, 4, "Sword", WEAPON, COMMON, 200);
+
+	//Armor
+	this->armorHead = nullptr;
+	this->armorChest = nullptr;
+	this->armorShoulders = nullptr;
+	this->armorArms = nullptr;
+	this->armorLegs = nullptr;
 
 	this->updateStats();
 	this->resetHP();
 
 	this->inventory.add(Weapon(5, 10, "Super-Sword", WEAPON, RARE, 500));
+	this->inventory.add(Armor(10, ARMOR_HEAD, "Helmet", ARMOR, COMMON, 200));
+	this->inventory.add(Armor(15, ARMOR_CHEST, "Chest-plate", ARMOR, COMMON, 300));
 
 	//Initialize attributes and core stats
 }
@@ -111,6 +121,36 @@ Weapon* Character::getWeapon()
 	return this->weapon;
 }
 
+Armor* Character::getArmor(int armor_type)
+{
+	switch (armor_type)
+	{
+	case ARMOR_HEAD:
+		return this->armorHead;
+		break;
+
+	case ARMOR_CHEST:
+		return this->armorChest;
+		break;
+
+	case ARMOR_SHOULDERS:
+		return this->armorShoulders;
+		break;
+
+	case ARMOR_ARMS:
+		return this->armorArms;
+		break;
+
+	case ARMOR_LEGS:
+		return this->armorLegs;
+		break;
+
+	default:
+		return nullptr;
+		break;
+	}
+}
+
 //Modifiers
 void Character::setLocation(const int location)
 {
@@ -139,6 +179,35 @@ void Character::move(const int x, const int y)
 void Character::setWeapon(Weapon * weapon)
 {
 	this->weapon = weapon;
+}
+
+void Character::setArmor(Armor * armor, const int armor_type)
+{
+	switch (armor_type)
+	{
+	case ARMOR_HEAD:
+		this->armorHead = armor;
+		break;
+
+	case ARMOR_CHEST:
+		this->armorChest = armor;
+		break;
+
+	case ARMOR_SHOULDERS:
+		this->armorShoulders = armor;
+		break;
+
+	case ARMOR_ARMS:
+		this->armorArms = armor;
+		break;
+
+	case ARMOR_LEGS:
+		this->armorLegs = armor;
+		break;
+
+	default:
+		break;
+	}
 }
 
 //Functions
@@ -407,8 +476,25 @@ const std::string Character::toStringStats()
 				<< "\n";
 		}
 
-		ss << " Defence: " << this->defence << "\n"
-		<< " Hit rating: " << this->hitRating << "\n"
+		if (this->armorHead)
+		{
+			ss << " Armor Head: " << this->armorHead->toString() << "\n"
+				<< "\n";
+
+
+			ss << " Defence: " << this->defence + this->armorHead->getDefence() << "\n"
+				<< "\n";
+		}
+		else
+		{
+			ss << " Armor Head: " << "None equipped" << "\n"
+				<< "\n";
+
+			ss << " Defence: " << this->defence << "\n"
+				<< "\n";
+		}
+
+		ss << " Hit rating: " << this->hitRating << "\n"
 		<< " Crit chance: " << this->critChance << "\n"
 		<< " Magic find: " << this->magicFind << "\n"
 		<< "\n"

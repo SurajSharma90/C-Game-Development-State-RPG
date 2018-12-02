@@ -140,8 +140,13 @@ Item * Inventory::replace(const unsigned index, Item * item)
 
 	Item* temp = this->items[index]->clone();
 	delete this->items[index];
-	this->items[index] = item->clone();
 
+	if (item)
+		this->items[index] = item->clone();
+	
+	else
+		this->items[index] = this->items[--this->nrOfItems];
+	
 	return temp;
 }
 

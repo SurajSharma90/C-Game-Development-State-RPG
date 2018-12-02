@@ -54,11 +54,18 @@ void CharacterInventoryState::updateMenu()
 			std::cout << gui::msg_error("No such item in inventory.");
 		else
 		{
-			Weapon* wep = dynamic_cast<Weapon*>(this->character->getInventory().replace(choice, this->character->getWeapon()));
+			Weapon* weapon_ptr = dynamic_cast<Weapon*>(&this->character->getInventory().at(choice));
+			Armor* armor_ptr = dynamic_cast<Armor*>(&this->character->getInventory().at(choice));
 			
-			if (wep)
+			if (weapon_ptr)
 			{
-				this->character->setWeapon(wep);
+				weapon_ptr = static_cast<Weapon*>(this->character->getInventory().replace(choice, this->character->getWeapon()));
+				this->character->setWeapon(weapon_ptr);
+			}
+			else if (armor_ptr)
+			{
+				armor_ptr = static_cast<Armor*>(this->character->getInventory().replace(choice, this->character->getArmor(armor_ptr->getArmorType())));
+				this->character->setArmor(armor_ptr, armor_ptr->getArmorType());
 			}
 		}
 
